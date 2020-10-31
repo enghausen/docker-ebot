@@ -16,7 +16,7 @@ RUN apt-get update -y && apt-get install -y netcat git nodejs npm libcurl4-gnutl
     php composer-setup.php --install-dir=/usr/bin && \
     php -r "unlink('composer-setup.php');" && \
     git clone -b ssl https://github.com/enghausen/eBot-CSGO.git "$EBOT_HOME" && \
-    cd "$EBOT_HOME" && git checkout "master" && \
+    cd "$EBOT_HOME" && git checkout "ssl" && \
     /usr/local/bin/php /usr/bin/composer.phar install
 
 WORKDIR ${EBOT_HOME}
