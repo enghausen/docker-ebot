@@ -9,8 +9,8 @@ MYSQL_PASS="${MYSQL_PASS:-ebotv3}"
 MYSQL_DB="${MYSQL_DB:-ebotv3}"
 
 SSL_ENABLED="${SSL_ENABLED:-true}"
-SSL_CERTIFICATE_PATH="${SSL_CERTIFICATE_PATH:-ssl/cert.pem}"
-SSL_KEY_PATH="${SSL_KEY_PATH:-ssl/key.pem}"
+SSL_CERTIFICATE_PATH="${SSL_CERTIFICATE_PATH:-/ssl/cert.pem}"
+SSL_KEY_PATH="${SSL_KEY_PATH:-/ssl/key.pem}"
 
 LO3_METHOD="${LO3_METHOD:-restart}"
 KO3_METHOD="${KO3_METHOD:-restart}"
