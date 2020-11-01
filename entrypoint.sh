@@ -73,7 +73,7 @@ sed -i "s|USE_DELAY_END_RECORD = .*|USE_DELAY_END_RECORD = $USE_DELAY_END_RECORD
 
 echo -e "\n" >> $EBOT_HOME/config/plugins.ini
 echo '[\eBot\Plugins\Official\ToornamentNotifier]' >> $EBOT_HOME/config/plugins.ini
-echo "url=http://${EXTERNAL_IP}/matchs/toornament/export/{MATCH_ID}" >> $EBOT_HOME/config/plugins.ini
+echo "url=https://${EXTERNAL_IP}/matchs/toornament/export/{MATCH_ID}" >> $EBOT_HOME/config/plugins.ini
 echo "key=${TOORNAMENT_PLUGIN_KEY}" >> $EBOT_HOME/config/plugins.ini
 
 exec php "$EBOT_HOME/bootstrap.php" 
