@@ -51,8 +51,6 @@ rm $CONFIG_FILE_TMP
 # for usage with docker-compose
 while ! nc -z $MYSQL_HOST $MYSQL_PORT; do sleep 3; done
 
-echo 'date.timezone = "${TIMEZONE}"' >> /usr/local/etc/php/conf.d/php.ini
-
 sed -i "s|BOT_IP =.*|BOT_IP = \"$CONTAINER_IP\"|" $CONFIG_FILE
 sed -i "s|EXTERNAL_LOG_IP = .*|EXTERNAL_LOG_IP = \"$EXTERNAL_IP\"|" $CONFIG_FILE
 sed -i "s|MYSQL_IP =.*|MYSQL_IP = \"$MYSQL_HOST\"|" $CONFIG_FILE
