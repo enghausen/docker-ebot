@@ -6,7 +6,7 @@ ENV EBOT_HOME="/ebot" \
 RUN apt-get update -y && apt-get install -y netcat git nodejs npm libcurl4-gnutls-dev && apt-get clean && \
     mkdir ${EBOT_HOME} && \
     ln -s /usr/bin/nodejs /usr/bin/node && \
-    npm install socket.io@0.9.19 archiver@0.21.0 formidable && \
+    npm install socket.io@0.9.19 archiver@0.21.0 formidable@1.2.2 && \
     npm install -g forever@1.0.1 && \
     pecl install pthreads-2.0.10 && \
     docker-php-ext-enable pthreads && \
