@@ -1,7 +1,9 @@
 #!/bin/bash
 
 CONTAINER_IP=$(hostname -i)
+BOT_PORT="${BOT_PORT:-12360}"
 DOMAIN="${DOMAIN:-}"
+
 MYSQL_HOST="${MYSQL_HOST:-mysql}"
 MYSQL_PORT="${MYSQL_PORT:-3306}"
 MYSQL_USER="${MYSQL_USER:-ebotv3}"
@@ -11,6 +13,8 @@ MYSQL_DB="${MYSQL_DB:-ebotv3}"
 SSL_ENABLED="${SSL_ENABLED:-true}"
 SSL_CERTIFICATE_PATH="${SSL_CERTIFICATE_PATH:-/ssl/cert.pem}"
 SSL_KEY_PATH="${SSL_KEY_PATH:-/ssl/key.pem}"
+
+NODE_STARTUP_METHOD="${NODE_STARTUP_METHOD:-none}"
 
 LO3_METHOD="${LO3_METHOD:-restart}"
 KO3_METHOD="${KO3_METHOD:-restart}"
@@ -52,12 +56,14 @@ rm $CONFIG_FILE_TMP
 while ! nc -z $MYSQL_HOST $MYSQL_PORT; do sleep 3; done
 
 sed -i "s|BOT_IP =.*|BOT_IP = \"$CONTAINER_IP\"|" $CONFIG_FILE
+sed -i "s|BOT_PORT =.*|BOT_PORT = \"$BOT_PORT\"|" $CONFIG_FILE
 sed -i "s|EXTERNAL_LOG_IP = .*|EXTERNAL_LOG_IP = \"$DOMAIN\"|" $CONFIG_FILE
 sed -i "s|MYSQL_IP =.*|MYSQL_IP = \"$MYSQL_HOST\"|" $CONFIG_FILE
 sed -i "s|MYSQL_PORT =.*|MYSQL_PORT = \"$MYSQL_PORT\"|" $CONFIG_FILE
 sed -i "s|MYSQL_USER =.*|MYSQL_USER = \"$MYSQL_USER\"|" $CONFIG_FILE
 sed -i "s|MYSQL_PASS =.*|MYSQL_PASS = \"$MYSQL_PASS\"|" $CONFIG_FILE
 sed -i "s|MYSQL_BASE =.*|MYSQL_BASE = \"$MYSQL_DB\"|" $CONFIG_FILE
+sed -i "s|NODE_STARTUP_METHOD =.*|NODE_STARTUP_METHOD = \"$NODE_STARTUP_METHOD\"|" $CONFIG_FILE
 sed -i "s|SSL_ENABLED =.*|SSL_ENABLED = $SSL_ENABLED|" $CONFIG_FILE
 sed -i "s|SSL_CERTIFICATE_PATH =.*|SSL_CERTIFICATE_PATH = \"$SSL_CERTIFICATE_PATH\"|" $CONFIG_FILE
 sed -i "s|SSL_KEY_PATH =.*|SSL_KEY_PATH = \"$SSL_KEY_PATH\"|" $CONFIG_FILE
@@ -73,3 +79,4 @@ sed -i "s|url=.*|url=https://${DOMAIN}/matchs/toornament/export/{MATCH_ID}|" $EB
 sed -i "s|key=.*|key=$TOORNAMENT_PLUGIN_KEY|" $EBOT_HOME/config/plugins.ini
 
 exec php "$EBOT_HOME/bootstrap.php" 
+forever start $EBOT_HOME/websocket_server.js $CONTAINER_IP $BOT_PORT
