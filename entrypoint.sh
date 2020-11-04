@@ -75,8 +75,9 @@ sed -i "s|DAMAGE_REPORT =.*|DAMAGE_REPORT = $DAMAGE_REPORT|" $CONFIG_FILE
 sed -i "s|DELAY_READY = .*|DELAY_READY = $DELAY_READY|" $CONFIG_FILE
 sed -i "s|USE_DELAY_END_RECORD = .*|USE_DELAY_END_RECORD = $USE_DELAY_END_RECORD|" $CONFIG_FILE
 
-sed -i "s|url=.*|url=https://${DOMAIN}/matchs/toornament/export/{MATCH_ID}|" $EBOT_HOME/config/plugins.ini
-sed -i "s|key=.*|key=$TOORNAMENT_PLUGIN_KEY|" $EBOT_HOME/config/plugins.ini
+sed -i "s|;\[\\\eBot\\\Plugins\\\Official\\\T.*|\[\\\eBot\\\Plugins\\\Official\\\ToornamentNotifier\]|" $EBOT_HOME/config/plugins.ini
+sed -i "s|;url=http://y.*|url=https://$DOMAIN/matchs/toornament/export/{MATCH_ID}|" $EBOT_HOME/config/plugins.ini
+sed -i "s|;key=.*|key=$TOORNAMENT_PLUGIN_KEY|" $EBOT_HOME/config/plugins.ini
 
 exec php "$EBOT_HOME/bootstrap.php" 
 forever start $EBOT_HOME/websocket_server.js $CONTAINER_IP $BOT_PORT
