@@ -4,7 +4,7 @@ ENV EBOT_HOME="/ebot" \
     TIMEZONE="Europe/Copenhagen"
 
 RUN apt-get update -y && apt-get install -y netcat git nodejs npm libcurl4-gnutls-dev && apt-get clean && \
-    mkdir -p ${EBOT_HOME}/ssl && \
+    mkdir ${EBOT_HOME} && \
     ln -s /usr/bin/nodejs /usr/bin/node && \
     npm install socket.io@0.9.19 archiver@0.21.0 formidable@1.2.2 && \
     npm install -g forever@1.0.1 && \
@@ -17,7 +17,8 @@ RUN apt-get update -y && apt-get install -y netcat git nodejs npm libcurl4-gnutl
     php -r "unlink('composer-setup.php');" && \
     git clone https://github.com/enghausen/eBot-CSGO.git "$EBOT_HOME" && \
     cd "$EBOT_HOME" && git checkout "master" && \
-    /usr/local/bin/php /usr/bin/composer.phar install
+    /usr/local/bin/php /usr/bin/composer.phar install && \
+    mkdir ${EBOT_HOME}/ssl
 
 WORKDIR ${EBOT_HOME}
 
