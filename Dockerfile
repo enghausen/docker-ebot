@@ -4,7 +4,7 @@ ENV EBOT_HOME="/ebot" \
     TIMEZONE="Europe/Copenhagen"
 
 RUN apt-get update -y && apt-get install -y netcat git nodejs npm libcurl4-gnutls-dev && apt-get clean && \
-    mkdir ${EBOT_HOME} && \
+    mkdir ${EBOT_HOME}/ssl && \
     ln -s /usr/bin/nodejs /usr/bin/node && \
     npm install socket.io@0.9.19 archiver@0.21.0 formidable@1.2.2 && \
     npm install -g forever@1.0.1 && \
