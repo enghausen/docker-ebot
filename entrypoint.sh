@@ -11,8 +11,8 @@ MYSQL_PASS="${MYSQL_PASS:-ebotv3}"
 MYSQL_DB="${MYSQL_DB:-ebotv3}"
 
 SSL_ENABLED="${SSL_ENABLED:-true}"
-SSL_CERTIFICATE_PATH="${SSL_CERTIFICATE_PATH:-$EBOT_HOME/ssl/fullchain.pem}"
-SSL_KEY_PATH="${SSL_KEY_PATH:-$EBOT_HOME/ssl/privkey.pem}"
+SSL_CERTIFICATE_PATH="${SSL_CERTIFICATE_PATH:-$EBOT_HOME/ssl/fullchain.cer}"
+SSL_KEY_PATH="${SSL_KEY_PATH:-$EBOT_HOME/ssl/$DOMAIN.key}"
 
 NODE_STARTUP_METHOD="${NODE_STARTUP_METHOD:-none}"
 
@@ -80,4 +80,4 @@ sed -i "s|;url=http://y.*|url=https://$DOMAIN/matchs/toornament/export/{MATCH_ID
 sed -i "s|;key=.*|key=$TOORNAMENT_PLUGIN_KEY|" $EBOT_HOME/config/plugins.ini
 
 exec php "$EBOT_HOME/bootstrap.php" 
-forever start $EBOT_HOME/websocket_server.js $CONTAINER_IP $BOT_PORT
+forever start $EBOT_HOME/websocket_server.js $CONTAINER_IP $BOT_PORT TRUE $SSL_CERTIFICATE_PATH $SSL_KEY_PATH
