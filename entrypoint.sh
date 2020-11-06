@@ -36,7 +36,7 @@ CONFIG_FILE_TMP="$CONFIG_FILE.tmp"
 
 # Remove sample maps
 cat $CONFIG_FILE_SAMPLE | grep -v 'MAP\[\] = "' > $CONFIG_FILE_TMP
-
+rm -f $CONFIG_FILE
 # Write config.ini file with configured maps
 while read line; do
 	if [[ "$line" =~ "[MAPS]" ]]; then
