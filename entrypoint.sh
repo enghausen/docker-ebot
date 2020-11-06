@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER_IP=${CONTAINER_IP:-(hostname -i)}
+CONTAINER_IP=$(hostname -i)
 BOT_PORT="${BOT_PORT:-12360}"
 DOMAIN="${DOMAIN:-}"
 
