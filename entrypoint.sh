@@ -79,5 +79,5 @@ sed -i "s|;\[\\\eBot\\\Plugins\\\Official\\\T.*|\[\\\eBot\\\Plugins\\\Official\\
 sed -i "s|;url=http://y.*|url=https://$DOMAIN/matchs/toornament/export/{MATCH_ID}|" $EBOT_HOME/config/plugins.ini
 sed -i "s|;key=.*|key=$TOORNAMENT_PLUGIN_KEY|" $EBOT_HOME/config/plugins.ini
 
-forever start $EBOT_HOME/websocket_server.js $CONTAINER_IP $BOT_PORT TRUE $SSL_CERTIFICATE_PATH $SSL_KEY_PATH
+forever start $EBOT_HOME/websocket_server.js $CONTAINER_IP $BOT_PORT TRUE $SSL_CERTIFICATE_PATH $SSL_KEY_PATH TRUE
 exec php "$EBOT_HOME/bootstrap.php" 
