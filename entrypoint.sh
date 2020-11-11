@@ -28,6 +28,8 @@ USE_DELAY_END_RECORD="${USE_DELAY_END_RECORD:-true}"
 
 TOORNAMENT_PLUGIN_KEY="${TOORNAMENT_PLUGIN_KEY:-}"
 
+TIMEZONE="${TIMEZONE:-Europe/Copenhagen}"
+
 MAPS="${MAPS:-de_dust2_se,de_nuke_se,de_inferno_se,de_mirage_ce,de_train_se,de_cache,de_season,de_dust2,de_nuke,de_inferno,de_train,de_mirage,de_cbble,de_overpass}"
 # Split string by comma into an array
 IFS=',' read -ra map_array <<< "$MAPS"
@@ -80,6 +82,8 @@ sed -i "s|USE_DELAY_END_RECORD = .*|USE_DELAY_END_RECORD = $USE_DELAY_END_RECORD
 sed -i "s|;\[\\\eBot\\\Plugins\\\Official\\\T.*|\[\\\eBot\\\Plugins\\\Official\\\ToornamentNotifier\]|" $EBOT_HOME/config/plugins.ini
 sed -i "s|;url=http://y.*|url=https://$DOMAIN/matchs/toornament/export/{MATCH_ID}|" $EBOT_HOME/config/plugins.ini
 sed -i "s|;key=.*|key=$TOORNAMENT_PLUGIN_KEY|" $EBOT_HOME/config/plugins.ini
+
+sed -i "s|date.timezone =.*|date.timezone = \"$TIMEZONE\"|" /usr/local/etc/php/conf.d/php.ini
 
 forever start $EBOT_HOME/websocket_server.js $CONTAINER_IP $BOT_PORT $FOREVER_SSL $SSL_CERTIFICATE_PATH $SSL_KEY_PATH $FOREVER_SECUREUPLOAD
 exec php "$EBOT_HOME/bootstrap.php" 
