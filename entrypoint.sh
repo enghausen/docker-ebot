@@ -13,6 +13,8 @@ MYSQL_DB="${MYSQL_DB:-ebotv3}"
 SSL_ENABLED="${SSL_ENABLED:-true}"
 SSL_CERTIFICATE_PATH="${SSL_CERTIFICATE_PATH:-$EBOT_HOME/ssl/fullchain.cer}"
 SSL_KEY_PATH="${SSL_KEY_PATH:-$EBOT_HOME/ssl/$DOMAIN.key}"
+FOREVER_SSL="${FOREVER_SSL:-TRUE}"
+FOREVER_SECUREUPLOAD="${FOREVER_SECUREUPLOAD:-TRUE}"
 
 NODE_STARTUP_METHOD="${NODE_STARTUP_METHOD:-none}"
 
@@ -79,5 +81,5 @@ sed -i "s|;\[\\\eBot\\\Plugins\\\Official\\\T.*|\[\\\eBot\\\Plugins\\\Official\\
 sed -i "s|;url=http://y.*|url=https://$DOMAIN/matchs/toornament/export/{MATCH_ID}|" $EBOT_HOME/config/plugins.ini
 sed -i "s|;key=.*|key=$TOORNAMENT_PLUGIN_KEY|" $EBOT_HOME/config/plugins.ini
 
-forever start $EBOT_HOME/websocket_server.js $CONTAINER_IP $BOT_PORT TRUE $SSL_CERTIFICATE_PATH $SSL_KEY_PATH TRUE
+forever start $EBOT_HOME/websocket_server.js $CONTAINER_IP $BOT_PORT $FOREVER_SSL $SSL_CERTIFICATE_PATH $SSL_KEY_PATH $FOREVER_SECUREUPLOAD
 exec php "$EBOT_HOME/bootstrap.php" 
