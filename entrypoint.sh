@@ -2,7 +2,7 @@
 
 CONTAINER_IP=$(hostname -i)
 BOT_PORT="${BOT_PORT:-12360}"
-DOMAIN="${DOMAIN:-}"
+DOMAIN="${DOMAIN:-ebot.doamin.com}"
 
 MYSQL_HOST="${MYSQL_HOST:-mysql}"
 MYSQL_PORT="${MYSQL_PORT:-3306}"
