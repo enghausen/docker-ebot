@@ -12,7 +12,7 @@ MYSQL_DB="${MYSQL_DB:-ebotv3}"
 
 # eBot settings
 CONTAINER_IP=$(hostname -i)
-BOT_PORT="${BOT_PORT:-12360}"
+EBOT_PORT="${EBOT_PORT:-12360}"
 DELAY_BUSY_SERVER="${DELAY_BUSY_SERVER:-120}"
 NB_MAX_MATCHS="${NB_MAX_MATCHS:-0}"
 PAUSE_METHOD="${PAUSE_METHOD:-nextRound}"
@@ -82,7 +82,7 @@ sed -i "s|MYSQL_USER =.*|MYSQL_USER = \"$MYSQL_USER\"|" $CONFIG_FILE
 sed -i "s|MYSQL_PASS =.*|MYSQL_PASS = \"$MYSQL_PASS\"|" $CONFIG_FILE
 sed -i "s|MYSQL_BASE =.*|MYSQL_BASE = \"$MYSQL_DB\"|" $CONFIG_FILE
 sed -i "s|BOT_IP =.*|BOT_IP = \"$CONTAINER_IP\"|" $CONFIG_FILE
-sed -i "s|BOT_PORT =.*|BOT_PORT = $BOT_PORT|" $CONFIG_FILE
+sed -i "s|BOT_PORT =.*|BOT_PORT = $EBOT_PORT|" $CONFIG_FILE
 sed -i "s|SSL_ENABLED =.*|SSL_ENABLED = $SSL_ENABLED|" $CONFIG_FILE
 sed -i "s|SSL_CERTIFICATE_PATH =.*|SSL_CERTIFICATE_PATH = \"$SSL_CERTIFICATE_PATH\"|" $CONFIG_FILE
 sed -i "s|SSL_KEY_PATH =.*|SSL_KEY_PATH = \"$SSL_KEY_PATH\"|" $CONFIG_FILE
@@ -110,5 +110,5 @@ sed -i "s|;key=.*|key=$TOORNAMENT_PLUGIN_KEY|" $EBOT_HOME/config/plugins.ini
 sed -i "s|date.timezone =.*|date.timezone = \"$TIMEZONE\"|" /usr/local/etc/php/conf.d/php.ini
 
 # Start the websocket with forever and execute the boostrap (secureUpload enabled by default. /upload is therefor only avalible from private IPs)
-forever start $EBOT_HOME/websocket_server.js $CONTAINER_IP $BOT_PORT $FOREVER_SSL $SSL_CERTIFICATE_PATH $SSL_KEY_PATH $FOREVER_SECUREUPLOAD
+forever start $EBOT_HOME/websocket_server.js $CONTAINER_IP $EBOT_PORT $FOREVER_SSL $SSL_CERTIFICATE_PATH $SSL_KEY_PATH $FOREVER_SECUREUPLOAD
 exec php "$EBOT_HOME/bootstrap.php" 
