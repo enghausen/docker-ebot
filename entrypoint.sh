@@ -109,6 +109,9 @@ sed -i "s|;key=.*|key=$TOORNAMENT_PLUGIN_KEY|" $EBOT_HOME/config/plugins.ini
 # PHP config
 sed -i "s|date.timezone =.*|date.timezone = \"$TIMEZONE\"|" /usr/local/etc/php/conf.d/php.ini
 
+# wait-for-it script - need to make sure ebotweb-ssl container is up
+wait-for-it.sh -t 0 ebotweb-ssl:443 -- echo "ebotweb-ssl on port 443 is now up"
+
 # Start the websocket with forever and execute the boostrap (secureUpload enabled by default. /upload is therefor only avalible from private IPs)
 forever start $EBOT_HOME/websocket_server.js $CONTAINER_IP $EBOT_PORT $FOREVER_SSL $SSL_CERTIFICATE_PATH $SSL_KEY_PATH $FOREVER_SECUREUPLOAD
 exec php "$EBOT_HOME/bootstrap.php" 
