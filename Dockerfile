@@ -18,7 +18,8 @@ RUN apt-get update -y && apt-get install -y netcat git nodejs npm libcurl4-gnutl
     git clone https://github.com/enghausen/eBot-CSGO.git ${EBOT_HOME} && \
     cd ${EBOT_HOME} && git checkout "master" && \
     /usr/local/bin/php /usr/bin/composer.phar install && \
-    mkdir ${EBOT_HOME}/ssl
+    mkdir ${EBOT_HOME}/ssl && \
+    curl https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -o /wait-for-it.sh
 
 WORKDIR ${EBOT_HOME}
 
