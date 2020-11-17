@@ -3,6 +3,9 @@
 # Domain for SSL and eBot settings
 DOMAIN="${DOMAIN:-ebot.doamin.com}"
 
+#External IP - Used to whitelist the external eBot IP on CS:GO servers (sv_rcon_whitelist_address)
+EXTERNAL_IP=$(curl -s http://whatismyip.akamai.com/)
+
 # MYSQL settings
 MYSQL_HOST="${MYSQL_HOST:-mysql}"
 MYSQL_PORT="${MYSQL_PORT:-3306}"
@@ -86,7 +89,7 @@ sed -i "s|BOT_PORT =.*|BOT_PORT = $EBOT_PORT|" $CONFIG_FILE
 sed -i "s|SSL_ENABLED =.*|SSL_ENABLED = $SSL_ENABLED|" $CONFIG_FILE
 sed -i "s|SSL_CERTIFICATE_PATH =.*|SSL_CERTIFICATE_PATH = \"$SSL_CERTIFICATE_PATH\"|" $CONFIG_FILE
 sed -i "s|SSL_KEY_PATH =.*|SSL_KEY_PATH = \"$SSL_KEY_PATH\"|" $CONFIG_FILE
-sed -i "s|EXTERNAL_LOG_IP = .*|EXTERNAL_LOG_IP = \"$DOMAIN\"|" $CONFIG_FILE
+sed -i "s|EXTERNAL_LOG_IP = .*|EXTERNAL_LOG_IP = \"$EXTERNAL_IP\"|" $CONFIG_FILE
 sed -i "s|DELAY_BUSY_SERVER = .*|DELAY_BUSY_SERVER = $DELAY_BUSY_SERVER|" $CONFIG_FILE
 sed -i "s|NB_MAX_MATCHS = .*|NB_MAX_MATCHS = $NB_MAX_MATCHS|" $CONFIG_FILE
 sed -i "s|PAUSE_METHOD = .*|PAUSE_METHOD = \"$PAUSE_METHOD\"|" $CONFIG_FILE
