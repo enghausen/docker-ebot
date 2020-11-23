@@ -41,6 +41,11 @@ TOORNAMENT_PLUGIN_KEY="${TOORNAMENT_PLUGIN_KEY:-}"
 # PHP settings
 TIMEZONE="${TIMEZONE:-Europe/Copenhagen}"
 
+# Custom IP Range for secureUpload
+IPCUSTOMRANGE1="${IPCUSTOMRANGE1:-8.8.8.8/32}"
+IPCUSTOMRANGE2="${IPCUSTOMRANGE2:-8.8.8.8/32}"
+IPCUSTOMRANGE3="${IPCUSTOMRANGE3:-8.8.8.8/32}"
+
 # Custom maps in config.ini
 MAPS="${MAPS:-de_dust2_se,de_nuke_se,de_inferno_se,de_mirage_ce,de_train_se,de_cache,de_season,de_dust2,de_nuke,de_inferno,de_train,de_mirage,de_cbble,de_overpass}"
 
@@ -108,6 +113,12 @@ sed -i "s|DELAY_READY = .*|DELAY_READY = $DELAY_READY|" $CONFIG_FILE
 sed -i "s|;\[\\\eBot\\\Plugins\\\Official\\\T.*|\[\\\eBot\\\Plugins\\\Official\\\ToornamentNotifier\]|" $EBOT_HOME/config/plugins.ini
 sed -i "s|;url=http://y.*|url=https://$DOMAIN/matchs/toornament/export/{MATCH_ID}|" $EBOT_HOME/config/plugins.ini
 sed -i "s|;key=.*|key=$TOORNAMENT_PLUGIN_KEY|" $EBOT_HOME/config/plugins.ini
+
+# Custom IP Range in the websocket_server.js for secureUpload enabled
+sed -i "s|var ipPublicRange =.*|var ipPublicRange = \"$EXTERNAL_IP/32\"|" $EBOT_HOME/websocket_server.js
+sed -i "s|var ipCustomRange1 =.*|var ipCustomRange1 = \"$IPCUSTOMRANGE1\"|" $EBOT_HOME/websocket_server.js
+sed -i "s|var ipCustomRange2 =.*|var ipCustomRange2 = \"$IPCUSTOMRANGE2\"|" $EBOT_HOME/websocket_server.js
+sed -i "s|var ipCustomRange3 =.*|var ipCustomRange3 = \"$IPCUSTOMRANGE3\"|" $EBOT_HOME/websocket_server.js
 
 # PHP config
 sed -i "s|date.timezone =.*|date.timezone = \"$TIMEZONE\"|" /usr/local/etc/php/conf.d/php.ini
