@@ -115,10 +115,10 @@ sed -i "s|;url=http://y.*|url=https://$DOMAIN/matchs/toornament/export/{MATCH_ID
 sed -i "s|;key=.*|key=$TOORNAMENT_PLUGIN_KEY|" $EBOT_HOME/config/plugins.ini
 
 # Custom IP Range in the websocket_server.js for secureUpload enabled
-sed -i "s|var ipPublicRange =.*|var ipPublicRange = \"$EXTERNAL_IP/32\"|" $EBOT_HOME/websocket_server.js
-sed -i "s|var ipCustomRange1 =.*|var ipCustomRange1 = \"$IPCUSTOMRANGE1\"|" $EBOT_HOME/websocket_server.js
-sed -i "s|var ipCustomRange2 =.*|var ipCustomRange2 = \"$IPCUSTOMRANGE2\"|" $EBOT_HOME/websocket_server.js
-sed -i "s|var ipCustomRange3 =.*|var ipCustomRange3 = \"$IPCUSTOMRANGE3\"|" $EBOT_HOME/websocket_server.js
+sed -i "s|var ipPublicRange =.*|var ipPublicRange = \"$EXTERNAL_IP/32\";|" $EBOT_HOME/websocket_server.js
+sed -i "s|var ipCustomRange1 =.*|var ipCustomRange1 = \"$IPCUSTOMRANGE1\";|" $EBOT_HOME/websocket_server.js
+sed -i "s|var ipCustomRange2 =.*|var ipCustomRange2 = \"$IPCUSTOMRANGE2\";|" $EBOT_HOME/websocket_server.js
+sed -i "s|var ipCustomRange3 =.*|var ipCustomRange3 = \"$IPCUSTOMRANGE3\";|" $EBOT_HOME/websocket_server.js
 
 # PHP config
 sed -i "s|date.timezone =.*|date.timezone = \"$TIMEZONE\"|" /usr/local/etc/php/conf.d/php.ini
