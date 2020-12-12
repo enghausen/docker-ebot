@@ -5,7 +5,7 @@ This docker image use my own fork (https://github.com/enghausen/eBot-CSGO) for f
 
 Docker Compose
 --------------
-See my docker-compose-ebot repository (https://github.com/enghausen/docker-compose-ebot)
+See my docker-compose-ebot-ssl repository (https://github.com/enghausen/docker-compose-ebot-ssl)
 
 Thanks to
 -------
